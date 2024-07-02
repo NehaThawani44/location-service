@@ -26,8 +26,8 @@ This is a simple Spring Boot application that allows users to log in and search 
 ### Clone the Repository
 
 ```sh
-git clone https://github.com/yourusername/location-search-app.git
-cd location-search-app
+git clone https://github.com/NehaThawani44/location-service.git
+cd location-service
 ```
 
 ### Build the Project
