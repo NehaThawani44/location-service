@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Location Search</title>
+    <style>
+        .result-container, .error-container {
+            margin-top: 20px;
+        }
+        .result {
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+<h1>Search Location</h1>
+<form action="/search" method="post">
+    <div>
+        <label>ZIP Code :</label>
+        <input type="text" name="query" required>
+    </div>
+    <div>
+        <button type="submit">Search</button>
+    </div>
+</form>
+<div class="result-container">
+    <h2>Result</h2>
+    <div th:if="${result}">
+        <div class="result">
+            <p><strong>ID:</strong> <span th:text="${result.id}"></span></p>
+            <p><strong>ZIP Code:</strong> <span th:text="${result.zipCode}"></span></p>
+            <p><strong>City Name:</strong> <span th:text="${result.cityName}"></span></p>
+        </div>
+    </div>
+</div>
+<div class="error-container">
+    <p th:if="${error}" class="error" th:text="${error}"></p>
+</div>
+</body>
+</html>

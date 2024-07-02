@@ -1,0 +1,1 @@
+CREATE TABLE IF NOT EXISTS locations ( id BIGINT AUTO_INCREMENT PRIMARY KEY, zip_code VARCHAR(10), city_name VARCHAR(255), UNIQUE (zip_code) );
