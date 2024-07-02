@@ -41,8 +41,8 @@ cd location-search-app
 
 ### Access the Application
 Open your web browser and go to http://localhost:8080/login to access the login page.
-Enter all the username and password.
-Search the zipcode '53111'
+* Enter all the username and password.
+* Search the zipcode '53111'
 
 # CRUD Operations
 ## Add a Location
@@ -51,12 +51,12 @@ To add a location, send a POST request with JSON data to /add.
 ### Request:
 
 ````
-POST /add
+POST http://localhost:8080/add
 Content-Type: application/json
 
 {
-"zipCode": "53111",
-"cityName": "Bonn"
+    "zipCode": "53111",
+    "cityName": "Bonn"
 }
 ````
 ### Response:
@@ -73,22 +73,21 @@ To retrieve all locations, send a GET request to /.
 
 ### Request:
 ````
-GET /
+GET http://localhost:8080/
 ````
 ### Response:
 ````````
 [
-{
-"id": 1,
-"zipCode": "12345",
-"cityName": "New York"
-},
-{
-"id": 2,
-"zipCode": "90210",
-"cityName": "Beverly Hills"
-}
-
+  {
+    "id": 1,
+    "zipCode": "12345",
+    "cityName": "New York"
+  },
+  {
+    "id": 2,
+    "zipCode": "90210",
+    "cityName": "Beverly Hills"
+  }
 ]
 ````````
 ## Get a Location by ZIP Code
@@ -96,7 +95,7 @@ To retrieve a location by its ZIP code, send a GET request to /zipcode/{zipCode}
 
 ### Request:
 ````````
-GET /zipcode/10001
+GET http://localhost:8080/zipcode/10001
 `````````
 
 ## Update a Location
@@ -105,12 +104,14 @@ To update the city name of a location, send a PUT request with JSON data to /loc
 ### Request:
 
 ``````
-PUT /update/10001
+PUT http://localhost:8080/update/53111
+
 Content-Type: application/json
 
 {
-  "cityName": "Updated City"
+  "cityName": "Bonn"
 }
+
 ``````
 ### Response:
 ``````
@@ -126,7 +127,7 @@ To delete a location by its ZIP code, send a DELETE request to /delete/{zipCode}
 
 ### Request:
 ``````
-DELETE /delete/10001
+DELETE http://localhost:8080/delete/10001
 ``````
 ### Response:
 ````
