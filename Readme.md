@@ -80,13 +80,13 @@ GET http://localhost:8080/
 [
   {
     "id": 1,
-    "zipCode": "12345",
-    "cityName": "New York"
+    "zipCode": "60311",
+    "cityName": "Frankfurt"
   },
   {
     "id": 2,
-    "zipCode": "90210",
-    "cityName": "Beverly Hills"
+    "zipCode": "68165",
+    "cityName": "Mannheim"
   }
 ]
 ````````
