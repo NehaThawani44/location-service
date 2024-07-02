@@ -41,7 +41,7 @@ cd location-service
 
 ### Access the Application
 Open your web browser and go to http://localhost:8080/login to access the login page.
-* Enter all the username and password.
+* Enter a username and password.
 * Search the zipcode '53111'
 
 # CRUD Operations
