@@ -62,8 +62,9 @@ public class LocationController {
 
     @DeleteMapping("/delete/{zipCode}")
     public ResponseEntity<String> deleteLocation(@PathVariable String zipCode) {
-        boolean deleted = locationService.deleteLocation(zipCode);
-        if (deleted) {
+
+        if (zipCode!=null) {
+            locationService.deleteLocation(zipCode);
             return ResponseEntity.ok("Location deleted successfully");
         } else {
             return ResponseEntity.status(404).body("Location not found for zip code: " + zipCode);

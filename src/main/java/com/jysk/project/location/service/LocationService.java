@@ -1,9 +1,11 @@
 package com.jysk.project.location.service;
 
 import com.jysk.project.location.domain.Location;
+import com.jysk.project.location.exception.CustomException;
 import com.jysk.project.location.repository.LocationRepository;
-import jakarta.annotation.PostConstruct;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -11,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 @Service
+@Slf4j
 public class LocationService {
 
     @Autowired
@@ -19,7 +22,7 @@ public class LocationService {
     private Map<String, Location> zipCodeToLocationMap = new HashMap<>();
     private Map<String, Location> cityNameToLocationMap = new HashMap<>();
 
-    @PostConstruct
+   /* @PostConstruct
     public void init() {
         // Initialize the maps of locations
         addLocation(new Location("21079", "Harburg"));
@@ -28,7 +31,7 @@ public class LocationService {
         addLocation(new Location("53111", "Bonn"));
         addLocation(new Location("24976", "Handewitt"));
         addLocation(new Location("24558", "Flensburg"));
-    }
+    }*/
 
     public Location searchLocation(String query) {
         Location location = locationRepository.findByZipCode(query);
@@ -40,7 +43,12 @@ public class LocationService {
     }
 
     public void addLocation(Location location) {
-        locationRepository.save(location);
+        try {
+            locationRepository.save(location);
+        } catch (DataIntegrityViolationException e) {
+            log.error("Error adding location: ZIP code must be unique", e);
+            throw new CustomException("ZIP code must be unique");
+        }
     }
 
     public List<Location> getAllLocations() {
@@ -61,16 +69,17 @@ public class LocationService {
             location.setCityName(cityName);
             return locationRepository.save(location);
         }
-        return null;
+        throw new CustomException("Location not found");
     }
 
-    public boolean deleteLocation(String zipCode) {
+
+    public void deleteLocation(String zipCode) {
         Location location = locationRepository.findByZipCode(zipCode);
         if (location != null) {
             locationRepository.delete(location);
-            return true;
+        } else {
+            throw new CustomException("Location not found");
         }
-        return false;
     }
 
 }
